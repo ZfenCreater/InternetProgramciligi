@@ -1,0 +1,103 @@
+﻿@using example.Models
+@model List<foto>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_adminLayout.cshtml";
+}
+
+
+
+@section scripts{
+    <script>
+
+        listData = function () {
+            $.ajax({
+                url: '@Url.Action("fotoList", "Admin")',
+                contentType: false,
+                processData: false,
+                success: function (res) {
+                    $('#fotolist').html(res);
+                },
+                error: function (ex) {
+                    console.log(ex);
+                }
+            });
+        }
+
+        showModal = function (url) {
+            $.ajax({
+                url: url,
+                contentType: false,
+                processData: false,
+                success: function (res) {
+                    $('#insertOrUpdateContent').html(res);
+                    $('#insertUpdateModal .modal-title').html(modalTitle);
+                    $('#insertUpdateModal').modal("show");
+                },
+                error: function (ex) {
+                    console.log(ex);
+                }
+            });
+        }
+
+        hideModal = function () {
+            $('#insertUpdateModal').modal("hide");
+        }
+
+        submitForm = function (e, form) {
+            e.preventDefault();
+
+
+            $.ajax({
+                url: form.action,
+                type:'POST',
+                data: new FormData(form),
+                contentType: false,
+                processData: false,
+                success: function (res) {
+                    if (res.success) {
+                        $('#insertUpdateModal').modal("hide");
+                        listData();
+                    }
+                },
+                error: function (ex) {
+                    console.log(ex);
+                }
+
+            })
+
+            return false;
+        }
+    </script>
+}
+
+<h2>Fotoğraf Liste</h2>
+<hr />
+<div class="row mb-3">
+    <div class="col">
+        <a>@Html.ActionLink("Fotoğraf Ekle", "fotoInsertOrUpdate", "Admin", new { area = "" }, new { @class = "btn btn-primary" })</a>
+
+    </div>
+</div>
+<div class="row">
+    <div class="col" id="fotolist">
+        @Html.Partial("fotoList")
+    </div>
+</div>
+
+
+<div class="modal fade" id="insertUpdateModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div id="insertOrUpdateContent">
+
+            </div>
+        </div>
+    </div>
+</div>
+

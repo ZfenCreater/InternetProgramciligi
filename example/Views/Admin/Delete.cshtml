@@ -1,0 +1,16 @@
+﻿@using example.Models
+@model yemekler
+
+
+
+@using (Html.BeginForm("Delete", "Admin", FormMethod.Post, new { onsubmit = "submitForm(event, this)" }))
+{
+    <h2>@Model.adi adlı yemeği silmek istiyor musunuz?</h2>
+    <div class="row mb-3">
+        <div class="offset-sm-2 col-sm-10">
+            <a onclick="hideModal()" class="btn btn-danger">İptal</a>
+            <button type="submit" class="btn btn-primary">Kaydet</button>
+        </div>
+    </div>
+}
+

@@ -1,0 +1,30 @@
+﻿@using example.Controllers
+@using example.Models
+
+@model foto
+
+
+
+
+
+@using (Html.BeginForm("fotoInsertOrUpdate", "Admin", FormMethod.Post, new { onsubmit = "submitForm(event, this)" }))
+{
+    @Html.HiddenFor(x => x.id)
+    <div class="modal-body">
+
+        <div class="row mb-3">
+            @Html.LabelFor(x => x.imageurl, new { @class = "col-sm-2 col-form-label" })
+            <div class="col-sm-10">
+                @Html.TextBoxFor(x => x.imageurl, new { @class = "form-control" })
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <div class="row mb-3">
+            <div class="col">
+                <a onclick="hideModal()" class="btn btn-danger">İptal</a>
+                <button type="submit" class="btn btn-primary">Kaydet</button>
+            </div>
+        </div>
+    </div>
+}

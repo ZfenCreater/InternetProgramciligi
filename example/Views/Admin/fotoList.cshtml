@@ -1,0 +1,24 @@
+﻿@using example.Models
+@model List<foto>
+
+<table class="table table-striped">
+    <tr>
+        <th>id</th>
+        <th>foto</th>
+        <th></th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.id</td>
+            <td>@item.imageurl</td>
+
+            <td>
+                <a href="@Url.Action("fotoDelete", "Admin", new { id = item.id })" class="btn btn-danger btn-sm">Sil</a>
+                <a href="@Url.Action("fotoInsertOrUpdate", "Admin", new { id = item.id })" class="btn btn-info btn-sm">Güncelle</a>
+            </td>
+        </tr>
+    }
+</table>
+
+

@@ -1,0 +1,67 @@
+﻿@using example.Models
+
+@model List<yemekler>
+
+
+@{
+    ViewBag.Title = "Yemeklerimiz";
+}
+
+<div class="p-5 text-center bg-light" style="margin-top: 58px;">
+    <h1 class="mb-3">Tokat Yöresel Yemekler</h1>
+    <h4 class="mb-3">Yemeklerimiz</h4>
+    <div class="btn-group shadow-0" role="group" aria-label="Basic example">
+        <button type="button" class="btn btn-outline-secondary" data-mdb-color="dark" onClick="location.href='#yemek'">Yemeklerimiz</button>
+        <button type="button" class="btn btn-outline-secondary" data-mdb-color="dark" onClick="location.href='#tatli'">Tatlılarımız</button>
+        <button type="button" class="btn btn-outline-secondary" data-mdb-color="dark" onClick="location.href='#icecek'">İçecekler</button>
+    </div>
+
+</div>
+
+<hr class="featurette-divider">
+<h2 id="yemek" class="text-center">Yemeklerimiz.</h2>
+<div class="row">
+    @foreach (var item in yemekdata.Items)
+    {
+        if (item.yemekcesitid ==1)
+        {
+            @Html.Partial("yemeklerpartialview", item)
+        }
+
+    }
+
+
+</div>
+
+
+
+
+<hr class="featurette-divider">
+<h2 id="tatli" class="text-center mt-3">Tatlılarımız.</h2>
+<div class="row">
+    @foreach (var item in yemekdata.Items)
+    {
+        if (item.yemekcesitid == 2)
+        {
+            @Html.Partial("yemeklerpartialview", item)
+        }
+
+    }
+</div>
+
+
+
+<hr class="featurette-divider">
+<h2 id="icecek" class="text-center mt-3">İçecekler.</h2>
+<div class="row">
+    @foreach (var item in yemekdata.Items)
+    {
+        if (item.yemekcesitid == 3)
+        {
+            @Html.Partial("yemeklerpartialview", item)
+        }
+
+    }
+</div>
+
+
